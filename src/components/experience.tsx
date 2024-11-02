@@ -1,29 +1,55 @@
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import { useState, useEffect } from 'react';
-import { Variants, motion } from 'framer-motion';
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import { useState, useEffect } from "react";
+import { Variants, motion } from "framer-motion";
 // import 'react-vertical-timeline-component/style.min.css';
-import { experiences } from '../constants/index';
-import SectionWrapper from '../components/sectionWrapper';
-import { textVariant } from '../utils/motion';
-import Image from 'next/image';
+import { education, experiences } from "../constants/index";
+import SectionWrapper from "../components/sectionWrapper";
+import { textVariant } from "../utils/motion";
+import Image from "next/image";
 
-const ExperienceCard = ({ experience, currentColors }: { experience: any; currentColors: any }) => (
+const ExperienceCard = ({
+  experience,
+  currentColors,
+}: {
+  experience: any;
+  currentColors: any;
+}) => (
   <VerticalTimelineElement
-    contentStyle={{ background: currentColors.secondaryColor, color: currentColors.textColor }}
+    contentStyle={{
+      background: currentColors.secondaryColor,
+      color: currentColors.textColor,
+    }}
     contentArrowStyle={{ borderRight: `7px solid var(--color-secondary)` }}
     date={experience.date}
     iconStyle={{ background: currentColors.accentColor }}
-    icon={<Image src={experience.icon} alt={experience.companyName} className='rounded-full object-contain shadow-timeline-border' />}
+    icon={
+      <Image
+        src={experience.icon}
+        alt={experience.companyName}
+        className="rounded-full object-contain shadow-timeline-border"
+      />
+    }
   >
     <div>
-      <h3 className='pointer-events-auto text-[24px] font-bold text-text'>{experience.title}</h3>
-      <p className='pointer-events-auto text-[16px] font-semibold text-text opacity-75' style={{ margin: 0 }}>
+      <h3 className="pointer-events-auto text-[24px] font-bold text-text">
+        {experience.title}
+      </h3>
+      <p
+        className="pointer-events-auto text-[16px] font-semibold text-text opacity-75"
+        style={{ margin: 0 }}
+      >
         {experience.companyName}
       </p>
     </div>
-    <ul className='pointer-events-auto ml-5 mt-5 list-disc space-y-2'>
+    <ul className="pointer-events-auto ml-5 mt-5 list-disc space-y-2">
       {experience.points.map((point: string, index: number) => (
-        <li key={`experience-point-${index}`} className=' pl-1 text-[14px] tracking-wider text-text'>
+        <li
+          key={`experience-point-${index}`}
+          className=" pl-1 text-[14px] tracking-wider text-text"
+        >
           {point}
         </li>
       ))}
@@ -33,48 +59,68 @@ const ExperienceCard = ({ experience, currentColors }: { experience: any; curren
 
 const Experience = () => {
   const [currentColors, setCurrentColors] = useState({
-    secondaryColor: 'rgba(0, 0, 0, 0)',
-    textColor: 'rgba(0, 0, 0, 0)',
-    accentColor: 'rgba(0, 0, 0, 0)',
+    secondaryColor: "rgba(0, 0, 0, 0)",
+    textColor: "rgba(0, 0, 0, 0)",
+    accentColor: "rgba(0, 0, 0, 0)",
   });
 
   const changeColors = () => {
     const root = getComputedStyle(document.documentElement);
     setCurrentColors({
-      secondaryColor: root.getPropertyValue('--color-secondary'),
-      textColor: root.getPropertyValue('--color-text'),
-      accentColor: root.getPropertyValue('--color-accent'),
+      secondaryColor: root.getPropertyValue("--color-secondary"),
+      textColor: root.getPropertyValue("--color-text"),
+      accentColor: root.getPropertyValue("--color-accent"),
     });
   };
 
   useEffect(() => {
-    window.addEventListener('colorsUpdated', changeColors);
+    window.addEventListener("colorsUpdated", changeColors);
 
     return () => {
-      window.removeEventListener('colorsUpdated', changeColors);
+      window.removeEventListener("colorsUpdated", changeColors);
     };
   });
 
   return (
     <>
-      <motion.div variants={textVariant() as Variants}>
-        <p className='section-subtitle'>What I have done so far</p>
-        <h2 className='section-title'>Work Experience.</h2>
-      </motion.div>
+      <div>
+        <motion.div variants={textVariant() as Variants}>
+          <p className="section-subtitle">What I have done so far</p>
+          <h2 className="section-title">Work Experience.</h2>
+        </motion.div>
 
-      <div className='mt-20 flex flex-col'>
-        <VerticalTimeline lineColor={currentColors.accentColor}>
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} currentColors={currentColors} />
-          ))}
-        </VerticalTimeline>
+        <div className="mt-20 flex flex-col">
+          <VerticalTimeline lineColor={currentColors.accentColor}>
+            {experiences.map((experience, index) => (
+              <ExperienceCard
+                key={index}
+                experience={experience}
+                currentColors={currentColors}
+              />
+            ))}
+          </VerticalTimeline>
+        </div>
+      </div>
+      <div>
+        <motion.div variants={textVariant() as Variants}>
+          <p className="section-subtitle">Where did I Studied</p>
+          <h2 className="section-title">Education.</h2>
+        </motion.div>
+
+        <div className="mt-20 flex flex-col">
+          <VerticalTimeline lineColor={currentColors.accentColor}>
+            {education.map((experience, index) => (
+              <ExperienceCard
+                key={index}
+                experience={experience}
+                currentColors={currentColors}
+              />
+            ))}
+          </VerticalTimeline>
+        </div>
       </div>
     </>
   );
 };
 
-export default SectionWrapper(Experience, 'work');
-
-
-
-
+export default SectionWrapper(Experience, "work");

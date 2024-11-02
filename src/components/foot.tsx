@@ -4,32 +4,38 @@ import Image from "next/image";
 const Foot = () => {
   return (
     <footer className="pointer-events-auto relative z-20 flex flex-col items-center justify-center bg-secondary px-4 py-6 text-center text-text">
-      <div className="flex flex-col items-center xs:flex-row">
+      {/* <div className="flex flex-col items-center xs:flex-row">
         Made with lots of ❤️ !
-        {/* <div className='ml-3 mt-2 flex gap-2 text-[17px] xs:mt-0 '>
+        <div className="ml-3 mt-2 flex gap-2 text-[17px] xs:mt-0 ">
           {techUsed.map((icon) => (
             <div
               key={icon.name}
-              className='h-6 w-6 cursor-pointer transition-transform hover:scale-110 focus:scale-110'
+              className="h-6 w-6 cursor-pointer transition-transform hover:scale-110 focus:scale-110"
               tabIndex={0}
-              onClick={() => window.open(icon.link, '_blank')}
+              onClick={() => window.open(icon.link, "_blank")}
               onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  window.open(icon.link, '_blank');
+                if (event.key === "Enter") {
+                  window.open(icon.link, "_blank");
                 }
               }}
             >
-              <Image src={icon.icon} alt={icon.name} className='object-contain' width={32} height={32} />
+              <Image
+                src={icon.icon}
+                alt={icon.name}
+                className="object-contain"
+                width={32}
+                height={32}
+              />
             </div>
           ))}
-        </div> */}
-        {/* <span className='ml-3 mt-2 xs:mt-0'>lots of ❤️ !</span> */}
-      </div>
+        </div>
+        <span className="ml-3 mt-2 xs:mt-0">lots of ❤️ !</span>
+      </div> */}
       <p className="mt-5 text-[14px] opacity-75 ">
         &copy; {new Date().getFullYear()} Vijay Agavinti <br />
       </p>
       <a
-        href="https://github.com/Darshee-m/Portfolio"
+        href="https://github.com/vijay9237865/Portfolio"
         target="_blank"
         rel="noreferrer"
         className="mt-4 flex cursor-pointer items-center gap-1 text-[18px] font-medium text-text transition-transform duration-200 hover:-translate-y-[2px] focus:-translate-y-[2px] hover:text-primary focus:text-primary"
