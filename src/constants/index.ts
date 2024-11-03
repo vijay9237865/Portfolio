@@ -1,6 +1,7 @@
 // Companies
 import eminds from "../../public/icons/companies/eminds.jpeg";
 import SSE from "../../public/icons/companies/SSE.jpg";
+import UMKC from "../../public/icons/companies/umkc.png";
 
 // Projects
 import BuyMe from "../../public/photos/projects/BuyMe.png";
@@ -501,7 +502,7 @@ export const education = [
   {
     title: "Masters in Computer Science",
     companyName: "University of Missouri-Kansas City",
-    icon: eminds,
+    icon: UMKC,
     date: "Jan 2022 - May 2023",
     points: [],
   },

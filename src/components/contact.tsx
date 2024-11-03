@@ -1,30 +1,32 @@
-import { useState, useRef, useEffect } from 'react';
-import { Variants, motion } from 'framer-motion';
-import SectionWrapper from './sectionWrapper';
-import { slideIn } from '../utils/motion';
-import webGLFluidEnhanced from 'webgl-fluid-enhanced';
+import { useState, useRef, useEffect } from "react";
+import { Variants, motion } from "framer-motion";
+import SectionWrapper from "./sectionWrapper";
+import { slideIn } from "../utils/motion";
+import webGLFluidEnhanced from "webgl-fluid-enhanced";
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const [loading, setLoading] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   useEffect(() => {
     const button = buttonRef.current;
     if (button)
-      button.addEventListener('click', () => {
+      button.addEventListener("click", () => {
         webGLFluidEnhanced.splats();
       });
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
@@ -34,72 +36,82 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://europe-north1-michaelbrusegard.cloudfunctions.net/emailSender', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        "https://europe-north1-michaelbrusegard.cloudfunctions.net/emailSender",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       if (response.ok) {
-        setFeedbackMessage('Email sent successfully');
-        setForm({ name: '', email: '', message: '' });
+        setFeedbackMessage("Email sent successfully");
+        setForm({ name: "", email: "", message: "" });
       } else {
-        setFeedbackMessage('Error sending email');
+        setFeedbackMessage("Error sending email");
       }
     } catch (error) {
-      console.error('Error sending email:', error);
-      setFeedbackMessage('Error sending email');
+      console.error("Error sending email:", error);
+      setFeedbackMessage("Error sending email");
     } finally {
       setLoading(false);
       setTimeout(() => {
-        setFeedbackMessage('');
+        setFeedbackMessage("");
       }, 5000);
     }
   };
 
   return (
-    <div className='pointer-events-auto flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row'>
-      <motion.div variants={slideIn('left', 'tween', 0.2, 1) as Variants} className='flex-[0.75] rounded-2xl bg-secondary p-8'>
-        <p className='section-subtitle'>Get in touch</p>
-        <h3 className='section-title'>Contact.</h3>
-        <form ref={formRef} onSubmit={handleSubmit} className='mt-12 flex flex-col gap-8'>
-          <label className='flex flex-col'>
-            <span className='mb-4 font-medium text-text'>Your Name</span>
+    <div className="pointer-events-auto flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row">
+      <motion.div
+        variants={slideIn("left", "tween", 0.2, 1) as Variants}
+        className="flex-[0.75] rounded-2xl bg-secondary p-8"
+      >
+        <p className="section-subtitle">Get in touch</p>
+        <h3 className="section-title">Contact.</h3>
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="mt-12 flex flex-col gap-8"
+        >
+          <label className="flex flex-col">
+            <span className="mb-4 font-medium text-text">Your Name</span>
             <input
-              type='text'
-              name='name'
+              type="text"
+              name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="What's your name?"
-              className='outlined-none rounded-lg border-none bg-background px-6 py-4 font-medium text-text placeholder:opacity-75'
+              className="outlined-none rounded-lg border-none bg-background px-6 py-4 font-medium text-text placeholder:opacity-75"
               required
               disabled={loading}
             />
           </label>
-          <label className='flex flex-col'>
-            <span className='mb-4 font-medium text-text'>Your Email</span>
+          <label className="flex flex-col">
+            <span className="mb-4 font-medium text-text">Your Email</span>
             <input
-              type='email'
-              name='email'
+              type="email"
+              name="email"
               value={form.email}
               onChange={handleChange}
               placeholder="What's your Email?"
-              className='outlined-none rounded-lg border-none bg-background px-6 py-4 font-medium text-text placeholder:opacity-75'
+              className="outlined-none rounded-lg border-none bg-background px-6 py-4 font-medium text-text placeholder:opacity-75"
               required
               disabled={loading}
             />
           </label>
-          <label className='flex flex-col'>
-            <span className='mb-4 font-medium text-text'>Your Message</span>
+          <label className="flex flex-col">
+            <span className="mb-4 font-medium text-text">Your Message</span>
             <textarea
               rows={7}
-              name='message'
+              name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder='What do you want to say?'
-              className='outlined-none resize-none rounded-lg border-none bg-background px-6 py-4 font-medium text-text placeholder:opacity-75'
+              placeholder="What do you want to say?"
+              className="outlined-none resize-none rounded-lg border-none bg-background px-6 py-4 font-medium text-text placeholder:opacity-75"
               required
               disabled={loading}
             />
@@ -107,18 +119,26 @@ const Contact = () => {
 
           <button
             ref={buttonRef}
-            type='submit'
+            type="submit"
             className={`w-fit select-none rounded-xl bg-primary px-8 py-3 font-semibold text-background transition-all duration-200 ${
               loading
-                ? 'pointer-events-none'
-                : 'hover:-translate-y-1 focus:-translate-y-1 hover:from-primary focus:from-primary hover:to-accent focus:to-accent hover:text-text focus:text-text hover:shadow-xl focus:shadow-xl hover:shadow-primary focus:shadow-primary hover:bg-gradient-30 focus:bg-gradient-30'
+                ? "pointer-events-none"
+                : "hover:-translate-y-1 focus:-translate-y-1 hover:from-primary focus:from-primary hover:to-accent focus:to-accent hover:text-text focus:text-text hover:shadow-xl focus:shadow-xl hover:shadow-primary focus:shadow-primary hover:bg-gradient-30 focus:bg-gradient-30"
             }`}
             disabled={loading}
           >
-            {loading ? 'Sending...' : 'Send Message'}
+            {loading ? "Sending..." : "Send Message"}
           </button>
           {feedbackMessage && (
-            <p className={`ml-1 font-semibold ${feedbackMessage === 'Email sent successfully' ? 'text-green-600' : 'text-red-600'}`}>{feedbackMessage}</p>
+            <p
+              className={`ml-1 font-semibold ${
+                feedbackMessage === "Email sent successfully"
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {feedbackMessage}
+            </p>
           )}
         </form>
       </motion.div>
@@ -130,4 +150,4 @@ const Contact = () => {
   );
 };
 
-export default SectionWrapper(Contact, 'contact');
+export default SectionWrapper(Contact, "contact");

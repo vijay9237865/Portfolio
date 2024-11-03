@@ -194,32 +194,6 @@ const Hero = () => {
                 >
                   y
                 </motion.span>
-                {/* <motion.span
-                  ref={handleSpanRef}
-                  className="bouncer gradient-letter inline-block transition-colors hover:text-accent"
-                  variants={
-                    appear(1.0, 0.5, () =>
-                      handleAppearComplete(spanRefs.current[11])
-                    ) as Variants
-                  }
-                  initial="hidden"
-                  animate="show"
-                >
-                  e
-                </motion.span>
-                <motion.span
-                  ref={handleSpanRef}
-                  className="bouncer gradient-letter inline-block transition-colors hover:text-accent"
-                  variants={
-                    appear(1.1, 0.5, () =>
-                      handleAppearComplete(spanRefs.current[12])
-                    ) as Variants
-                  }
-                  initial="hidden"
-                  animate="show"
-                >
-                  e
-                </motion.span> */}
               </span>
               <motion.span
                 ref={handleSpanRef}

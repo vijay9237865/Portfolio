@@ -1,6 +1,6 @@
 import colors from "../utils/colors";
-import heroPhoto from "../../public/photos/hero/hero.png";
-import heroDraw from "../../public/photos/hero/draw.png";
+import heroPhoto from "../../public/photos/hero/hero1.png";
+// import heroDraw from "../../public/photos/hero/draw.png";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -50,18 +50,23 @@ const HeroImage = () => {
           <stop offset="100%" stopColor={"rgba(0, 0, 0, 0)"} />
         </linearGradient>
       </motion.svg>
-
       <Image
         src={heroPhoto}
         alt="Vijay's image"
-        className="hero-image absolute bottom-0 h-[60%] w-full object-contain xs:h-[75%]"
+        className="hero-image absolute bottom-20 left-[700px] h-[60%] w-[50%] object-cover xs:h-[75%] border border-white rounded-[12px]"
       />
+
+      {/* <Image
+        src={heroPhoto}
+        alt="Vijay's image"
+        className="hero-image absolute bottom-0 h-[60%] w-full object-contain xs:h-[75%]"
+      /> */}
 
       <div
         className="hero-draw absolute bottom-0 h-[60%] w-full bg-text object-contain xs:h-[75%]"
         style={{
-          maskImage: `url(${heroDraw.src})`,
-          WebkitMaskImage: `url(${heroDraw.src})`,
+          // maskImage: `url(${heroDraw.src})`,
+          // WebkitMaskImage: `url(${heroDraw.src})`,
           maskSize: "contain",
           WebkitMaskSize: "contain",
           maskRepeat: "no-repeat",
