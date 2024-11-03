@@ -53,7 +53,7 @@ const HeroImage = () => {
       <Image
         src={heroPhoto}
         alt="Vijay's image"
-        className="hero-image absolute bottom-20 left-[700px] h-[60%] w-[50%] object-cover xs:h-[75%] border border-white rounded-[12px]"
+        className="hero-image absolute bottom-20 left-[700px] h-[60%] w-[40%] object-cover xs:h-[75%] border border-white rounded-[12px]"
       />
 
       {/* <Image
